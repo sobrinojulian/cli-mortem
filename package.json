@@ -1,0 +1,23 @@
+{
+  "name": "mortem-cli",
+  "version": "1.0.0",
+  "description": "Morbid stats",
+  "main": "cli.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sobrinojulian/mortem-cli.git"
+  },
+  "author": "Sobrino Julian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sobrinojulian/mortem-cli/issues"
+  },
+  "homepage": "https://github.com/sobrinojulian/mortem-cli#readme",
+  "dependencies": {
+    "conf": "^1.4.0",
+    "meow": "^4.0.0",
+    "moment": "^2.20.1"
+  },
+  "devDependencies": {}
+}
