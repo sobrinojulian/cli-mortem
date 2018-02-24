@@ -1,6 +1,6 @@
 {
   "name": "mortem-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Morbid stats",
   "keywords": [],
   "homepage": "https://github.com/sobrinojulian/mortem-cli#readme",
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/sobrinojulian/mortem-cli.git"
   },
   "author": "Sobrino Julian <sobrinojulian@protonmail.com> (http://sobrinojulian.github.io)",
-  "files": ["cli.js"],
+  "files": ["cli.js", "mortem.js"],
   "bin" : { "mortem" : "cli.js" },
   "main": "cli.js",
   "scripts": {},
