@@ -11,7 +11,7 @@ const isDateSet = (config) => config.has('date');
 
 const errorAndExit = (message) => {
   console.error(message);
-  const failure = 1
+  const failure = 1;
   process.exit(failure);
 }
 
