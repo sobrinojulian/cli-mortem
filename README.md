@@ -1,0 +1,2 @@
+# mortem-cli
+Morbid stats
