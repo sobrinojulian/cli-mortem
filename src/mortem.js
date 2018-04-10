@@ -8,7 +8,6 @@
  */
 
 const Mortem = {
-
   hle: 70, // human life expectancy (years)
   led: 25567.5, // human life expectancy (days)
 
@@ -17,7 +16,7 @@ const Mortem = {
    * @param {Date} d - date of birth
    * @return {number} ETR (days)
    */
-  etr(d) {
+  etr (d) {
     return Mortem.led - Mortem.ndl(d)
   },
 
@@ -26,7 +25,7 @@ const Mortem = {
    * @param {Date} d - date of birth
    * @return {number} EYD
    */
-  eyd(d) {
+  eyd (d) {
     return d.getFullYear() + Mortem.hle
   },
 
@@ -35,8 +34,8 @@ const Mortem = {
    * @param {Date} d - date of birth
    * @return {number} progress percentage
    */
-  pro(d) {
-    return (Mortem.ndl(d) / Mortem.led) * 100
+  pro (d) {
+    return Mortem.ndl(d) / Mortem.led * 100
   },
 
   /**
@@ -44,12 +43,12 @@ const Mortem = {
    * @param {Date} d - date of birth
    * @return {number} number of days
    */
-  ndl(d) {
-    return Math.round(Math.abs((d.getTime() - (new Date()).getTime())/86400000))
+  ndl (d) {
+    return Math.round(Math.abs((d.getTime() - new Date().getTime()) / 86400000))
   }
 }
 
-module.exports.etr = (d) => Mortem.etr(d);
-module.exports.eyd = (d) => Mortem.eyd(d);
-module.exports.pro = (d) => Mortem.pro(d);
-module.exports.ndl = (d) => Mortem.ndl(d);
+module.exports.etr = (d) => Mortem.etr(d)
+module.exports.eyd = (d) => Mortem.eyd(d)
+module.exports.pro = (d) => Mortem.pro(d)
+module.exports.ndl = (d) => Mortem.ndl(d)
