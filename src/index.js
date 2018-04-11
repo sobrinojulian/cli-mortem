@@ -31,25 +31,21 @@ const cli = meow(`
       2062
 `)
 
-const exit = (error, status) => {
-  console.error(error)
-  process.exit(status)
-}
 const sbd = (date, config) => {
   if (moment(date, 'YYYY/MM/DD', true).isValid()) {
     config.set('date', date)
   } else {
-    exit('Invalid date', 1)
+    console.error('Invalid date')
   }
 }
-
 
 const config = new Conf()
 const command = cli.input[0]
 
-//config.delete('date')
-const error = !config.has('date') && command !== 'sbd'
-if (error) exit('Date is unset', 1)
+if (!config.has('date') && command !== 'sbd') {
+  console.error('Date is unset')
+  process.exit(1)
+}
 
 const date = new Date(config.get('date'))
 switch (command) {
