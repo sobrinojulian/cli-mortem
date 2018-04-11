@@ -8,13 +8,13 @@
   "bugs": "https://github.com/sobrinojulian/mortem-cli/issues",
   "license": "MIT",
   "files": [
-    "src/index.js",
-    "src/mortem.js"
+    "cli.js",
+    "mortem.js"
   ],
   "bin": {
-    "mortem": "src/index.js"
+    "mortem": "cli.js"
   },
-  "main": "src/index.js",
+  "main": "cli.js",
   "scripts": {},
   "author": "Sobrino Julian <sobrinojulian@protonmail.com> (http://sobrinojulian.github.io)",
   "dependencies": {

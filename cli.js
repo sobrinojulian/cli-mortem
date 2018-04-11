@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 
 const meow = require('meow')
-const Conf = require('conf')
-const moment = require('moment')
-const mortem = require('./mortem')
+const Mortem = require('./mortem')
 
 const cli = meow(`
     Usage
@@ -31,42 +29,38 @@ const cli = meow(`
       2062
 `)
 
-const sbd = (date, config) => {
-  if (moment(date, 'YYYY/MM/DD', true).isValid()) {
-    config.set('date', date)
-  } else {
-    console.error('Invalid date')
-  }
-}
-
-const config = new Conf()
 const command = cli.input[0]
-
-if (!config.has('date') && command !== 'sbd') {
-  console.error('Date is unset')
-  process.exit(1)
-}
-
-const date = new Date(config.get('date'))
 switch (command) {
   case 'sbd':
-    const newDate = cli.input[1]
-    sbd(newDate, config)
+    const date = cli.input[1]
+    Mortem.sbd(date)
+      .then(console.log)
+      .catch(console.error)
     break
   case 'gbd':
-    console.log(moment(date).format('YYYY/MM/DD'))
+    Mortem.gbd()
+      .then(console.log)
+      .catch(console.error)
     break
   case 'ndl':
-    console.log(mortem.ndl(date))
+    Mortem.ndl()
+      .then(console.log)
+      .catch(console.error)
     break
   case 'pro':
-    console.log(mortem.pro(date).toFixed(2) + '%')
+    Mortem.pro()
+      .then(x => console.log(`${x.toFixed(2)}%`))
+      .catch(console.error)
     break
   case 'etr':
-    console.log(mortem.etr(date))
+    Mortem.etr()
+      .then(console.log)
+      .catch(console.error)
     break
   case 'eyd':
-    console.log(mortem.eyd(date))
+    Mortem.eyd()
+      .then(console.log)
+      .catch(console.error)
     break
   default:
     cli.showHelp()

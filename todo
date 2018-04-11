@@ -1,0 +1,5 @@
+- final review && git merge master && npm publish
+someday:
+  - Make mortem.js (with module.export) another repository and npm install it here
+  - Add `xo && ava`
+  - Add Travis CI
