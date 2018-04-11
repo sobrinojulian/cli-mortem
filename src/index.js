@@ -5,22 +5,6 @@ const Conf = require('conf')
 const moment = require('moment')
 const mortem = require('./mortem')
 
-const isValidDate = (date) => moment(date, 'YYYY/MM/DD', true).isValid()
-
-const isDateSet = (config) => config.has('date')
-
-const errorAndExit = (message) => {
-  console.error(message)
-  const failure = 1
-  process.exit(failure)
-}
-
-const sbd = (date, config) => {
-  if (!isValidDate(date)) return false
-  config.set('date', date)
-  return true
-}
-
 const cli = meow(`
     Usage
       $ mortem <command>
@@ -47,29 +31,46 @@ const cli = meow(`
       2062
 `)
 
+const exit = (error, status) => {
+  console.error(error)
+  process.exit(status)
+}
+const sbd = (date, config) => {
+  if (moment(date, 'YYYY/MM/DD', true).isValid()) {
+    config.set('date', date)
+  } else {
+    exit('Invalid date', 1)
+  }
+}
+
+
 const config = new Conf()
 const command = cli.input[0]
-if (!isDateSet(config) && command !== 'sbd') errorAndExit('Date is unset')
-const d = new Date(config.get('date'))
+
+//config.delete('date')
+const error = !config.has('date') && command !== 'sbd'
+if (error) exit('Date is unset', 1)
+
+const date = new Date(config.get('date'))
 switch (command) {
   case 'sbd':
-    const input = cli.input[1]
-    if (!sbd(input, config)) errorAndExit('Invalid date')
+    const newDate = cli.input[1]
+    sbd(newDate, config)
     break
   case 'gbd':
-    console.log(moment(d).format('YYYY/MM/DD'))
+    console.log(moment(date).format('YYYY/MM/DD'))
     break
   case 'ndl':
-    console.log(mortem.ndl(d))
+    console.log(mortem.ndl(date))
     break
   case 'pro':
-    console.log(mortem.pro(d).toFixed(2) + '%')
+    console.log(mortem.pro(date).toFixed(2) + '%')
     break
   case 'etr':
-    console.log(mortem.etr(d))
+    console.log(mortem.etr(date))
     break
   case 'eyd':
-    console.log(mortem.eyd(d))
+    console.log(mortem.eyd(date))
     break
   default:
     cli.showHelp()
