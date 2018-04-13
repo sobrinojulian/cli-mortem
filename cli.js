@@ -1,25 +1,7 @@
 #!/usr/bin/env node
-'use strict';
-const meow = require('meow');
-const Conf = require('conf');
-const moment = require('moment');
-const mortem = require('./mortem');
 
-const isValidDate = (date) => moment(date, 'YYYY/MM/DD', true).isValid();
-
-const isDateSet = (config) => config.has('date');
-
-const errorAndExit = (message) => {
-  console.error(message);
-  const failure = 1;
-  process.exit(failure);
-}
-
-const sbd = (date, config) => {
-  if (!isValidDate(date)) return false;  
-  config.set('date', date);
-  return true;
-}
+const meow = require('meow')
+const Mortem = require('./mortem')
 
 const cli = meow(`
     Usage
@@ -45,32 +27,41 @@ const cli = meow(`
       16204
       $ mortem eyd
       2062
-`);
+`)
 
-const config = new Conf();
-const command = cli.input[0];
-if (!isDateSet(config) && command !== 'sbd') errorAndExit('Date is unset');
-const d = new Date(config.get('date')); 
+const command = cli.input[0]
 switch (command) {
   case 'sbd':
-    const input = cli.input[1];
-    if (!sbd(input, config)) errorAndExit('Invalid date');
-    break;
+    const date = cli.input[1]
+    Mortem.sbd(date)
+      .then(console.log)
+      .catch(console.error)
+    break
   case 'gbd':
-    console.log(moment(d).format('YYYY/MM/DD'));
-    break;
+    Mortem.gbd()
+      .then(console.log)
+      .catch(console.error)
+    break
   case 'ndl':
-    console.log(mortem.ndl(d));
-    break;
+    Mortem.ndl()
+      .then(console.log)
+      .catch(console.error)
+    break
   case 'pro':
-    console.log(mortem.pro(d).toFixed(2) + '%');
-    break;
+    Mortem.pro()
+      .then(console.log)
+      .catch(console.error)
+    break
   case 'etr':
-    console.log(mortem.etr(d));
-    break;
+    Mortem.etr()
+      .then(console.log)
+      .catch(console.error)
+    break
   case 'eyd':
-    console.log(mortem.eyd(d));
-    break;
+    Mortem.eyd()
+      .then(console.log)
+      .catch(console.error)
+    break
   default:
-    cli.showHelp();
+    cli.showHelp()
 }
