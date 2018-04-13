@@ -1,12 +1,12 @@
 const Conf = require('conf')
 const moment = require('moment')
 
-const unsetDateError = (mortem) => {
+const checkUnsetDate = (mortem) => {
   if (!Mortem.cfg.has('date')) {
     throw 'Unseted date. use: mortem sbd YYYY/MM/DD'
   }
 }
-const invalidDateError = (d) => {
+const checkInvalidDate = (d) => {
   if (!moment(d, 'YYYY/MM/DD').isValid()) {
     throw 'Invalid date. format: YYYY/MM/DD'
   }
@@ -18,35 +18,35 @@ const Mortem = {
   led: 25567.5, // human life expectancy (days)
 
   async sbd (d) {
-    invalidDateError(d)
+    checkInvalidDate(d)
     Mortem.cfg.set('date', d)
     return d
   },
 
   async gbd () {
-    unsetDateError(Mortem)
+    checkUnsetDate(Mortem)
     const d = new Date(Mortem.cfg.get('date'))
     return moment(d).format('YYYY/MM/DD')
   },
 
   async etr () {
-    unsetDateError(Mortem)
+    checkUnsetDate(Mortem)
     return Mortem.led - (await Mortem.ndl())
   },
 
   async eyd () {
-    unsetDateError(Mortem)
+    checkUnsetDate(Mortem)
     const d = new Date(Mortem.cfg.get('date'))
     return d.getFullYear() + Mortem.hle
   },
 
   async pro () {
-    unsetDateError(Mortem)
-    return (await Mortem.ndl()) / Mortem.led * 100
+    checkUnsetDate(Mortem)
+    return `${((await Mortem.ndl()) / Mortem.led * 100).toFixed(2)}%`
   },
 
   async ndl () {
-    unsetDateError(Mortem)
+    checkUnsetDate(Mortem)
     const d = new Date(Mortem.cfg.get('date'))
     return Math.round(Math.abs((d.getTime() - new Date().getTime()) / 86400000))
   }

@@ -49,7 +49,7 @@ switch (command) {
     break
   case 'pro':
     Mortem.pro()
-      .then(x => console.log(`${x.toFixed(2)}%`))
+      .then(console.log)
       .catch(console.error)
     break
   case 'etr':
