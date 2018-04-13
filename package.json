@@ -7,16 +7,12 @@
   "repository": "https://github.com/sobrinojulian/mortem-cli.git",
   "bugs": "https://github.com/sobrinojulian/mortem-cli/issues",
   "license": "MIT",
-  "files": [
-    "cli.js",
-    "mortem.js"
-  ],
-  "bin": {
-    "mortem": "cli.js"
-  },
+  "files": ["cli.js", "mortem.js"],
+  "bin": { "mortem": "cli.js" },
   "main": "cli.js",
   "scripts": {},
-  "author": "Sobrino Julian <sobrinojulian@protonmail.com> (http://sobrinojulian.github.io)",
+  "author":
+    "Sobrino Julian <sobrinojulian@protonmail.com> (http://sobrinojulian.github.io)",
   "dependencies": {
     "conf": "^1.4.0",
     "meow": "^4.0.0",
