@@ -1,13 +1,13 @@
 const Conf = require('conf')
-const moment = require('moment')
 
-const checkUnsetDate = (mortem) => {
+const checkUnsetDate = (Mortem) => {
   if (!Mortem.cfg.has('date')) {
     throw 'Unseted date. use: mortem sbd YYYY/MM/DD'
   }
 }
 const checkInvalidDate = (d) => {
-  if (!moment(d, 'YYYY/MM/DD').isValid()) {
+  const re = /^(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[01]|0[1-9]|[12][0-9])$/
+  if (!re.test(d)) {
     throw 'Invalid date. format: YYYY/MM/DD'
   }
 }
@@ -23,10 +23,13 @@ const Mortem = {
     return d
   },
 
-  async gbd () {
-    checkUnsetDate(Mortem)
+	async gbd() {
+		checkUnsetDate(Mortem)
     const d = new Date(Mortem.cfg.get('date'))
-    return moment(d).format('YYYY/MM/DD')
+    const DD = d.getDate()
+    const MM = d.getMonth() + 1
+    const YYYY = d.getFullYear()
+    return `${YYYY}/${MM}/${DD}`
   },
 
   async etr () {
