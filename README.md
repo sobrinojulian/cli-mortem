@@ -43,7 +43,7 @@ $ mortem --help
 
 ## Related
 
-- [joshavanier/mortem](https://github.com/joshavanier/mortem) - API for this module
+- [joshavanier/mortem](https://gitlab.com/joshavanier/mortem) - API for this module
 
 
 ## License
