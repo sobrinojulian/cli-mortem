@@ -1,4 +1,4 @@
-# mortem-cli
+# cli-mortem
 
 > Morbid stats
 
@@ -6,7 +6,7 @@
 ## Install
 
 ```
-$ npm install --global mortem-cli
+$ npm install --global cli-mortem
 ```
 
 
@@ -23,7 +23,7 @@ $ mortem --help
     gbd   Get Birth Date
     ndl   Number of Days Lived
     pro   Progress Percentage
-    etr   Estimated Time Remaining
+    edr   Estimated Days Remaining
     eyd   Estimated Date of Death
 
   Examples
@@ -34,7 +34,7 @@ $ mortem --help
     9363
     $ mortem pro
     36.62%
-    $ mortem etr
+    $ mortem edr
     16204
     $ mortem eyd
     2062
@@ -43,7 +43,7 @@ $ mortem --help
 
 ## Related
 
-- [joshavanier/mortem](https://github.com/joshavanier/mortem) - API for this module
+- [joshavanier/mortem](https://gitlab.com/joshavanier/mortem) - API for this module
 
 
 ## License

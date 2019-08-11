@@ -12,7 +12,7 @@ const cli = meow(`
       gbd   Get Birth Date
       ndl   Number of Days Lived
       pro   Progress Percentage
-      etr   Estimated Time Remaining
+      edr   Estimated Days Remaining
       eyd   Estimated Date of Death
 
     Examples
@@ -23,7 +23,7 @@ const cli = meow(`
       9363
       $ mortem pro
       36.62%
-      $ mortem etr
+      $ mortem edr
       16204
       $ mortem eyd
       2062
@@ -33,32 +33,32 @@ const command = cli.input[0]
 switch (command) {
   case 'sbd':
     const date = cli.input[1]
-    Mortem.sbd(date)
+    Mortem.setBirthDate(date)
       .then(console.log)
       .catch(console.error)
     break
   case 'gbd':
-    Mortem.gbd()
+    Mortem.getBirthDate()
       .then(console.log)
       .catch(console.error)
     break
   case 'ndl':
-    Mortem.ndl()
+    Mortem.numberOfDaysLived()
       .then(console.log)
       .catch(console.error)
     break
   case 'pro':
-    Mortem.pro()
+    Mortem.progressPercentage()
       .then(console.log)
       .catch(console.error)
     break
-  case 'etr':
-    Mortem.etr()
+  case 'edr':
+    Mortem.estimatedDaysRemaining()
       .then(console.log)
       .catch(console.error)
     break
   case 'eyd':
-    Mortem.eyd()
+    Mortem.estimatedYearOfDeath()
       .then(console.log)
       .catch(console.error)
     break
