@@ -23,7 +23,7 @@ const cli = meow(`
       9363
       $ mortem pro
       36.62%
-      $ mortem etr
+      $ mortem edr
       16204
       $ mortem eyd
       2062
@@ -52,8 +52,8 @@ switch (command) {
       .then(console.log)
       .catch(console.error)
     break
-  case 'etr':
-    Mortem.estimatedTimeRemaining()
+  case 'edr':
+    Mortem.estimatedDaysRemaining()
       .then(console.log)
       .catch(console.error)
     break

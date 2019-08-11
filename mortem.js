@@ -32,7 +32,7 @@ const Mortem = {
     return `${YYYY}/${MM}/${DD}`
   },
 
-  async estimatedTimeRemaining() {
+  async estimatedDaysRemaining() {
     checkUnsetDate(Mortem)
     const expected = Mortem.led
     const lived = await Mortem.numberOfDaysLived()
