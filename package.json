@@ -7,10 +7,6 @@
   "bugs": "https://github.com/sobrinojulian/cli-mortem/issues",
   "author": "Sobrino Julian <sobrinojulian@protonmail.com> (http://sobrinojulian.github.io)",
   "license": "MIT",
-  "files": [
-    "cli.js",
-    "mortem.js"
-  ],
   "bin": {
     "mortem": "cli.js"
   },
