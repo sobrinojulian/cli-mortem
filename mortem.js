@@ -14,44 +14,54 @@ const checkInvalidDate = (d) => {
 
 const Mortem = {
   cfg: new Conf(),
-  hle: 70, // human life expectancy (years)
-  led: 25567.5, // human life expectancy (days)
+  ley: 70, // life expectancy (years)
+  led: 25567.5, // life expectancy (days)
 
-  async sbd (d) {
+  async setBirthDate(d) {
     checkInvalidDate(d)
     Mortem.cfg.set('date', d)
     return d
   },
 
-	async gbd() {
-		checkUnsetDate(Mortem)
+  async getBirthDate() {
+    checkUnsetDate(Mortem)
     const d = new Date(Mortem.cfg.get('date'))
-    const DD = d.getDate()
-    const MM = d.getMonth() + 1
+    const DD = `${d.getDate()}`.padStart(2, '0')
+    const MM = `${d.getMonth() + 1}`.padStart(2, '0')
     const YYYY = d.getFullYear()
     return `${YYYY}/${MM}/${DD}`
   },
 
-  async etr () {
+  async estimatedTimeRemaining() {
     checkUnsetDate(Mortem)
-    return Mortem.led - (await Mortem.ndl())
+    const expected = Mortem.led
+    const lived = await Mortem.numberOfDaysLived()
+    return Math.ceil(expected - lived)
   },
 
-  async eyd () {
+  async estimatedYearOfDeath() {
     checkUnsetDate(Mortem)
     const d = new Date(Mortem.cfg.get('date'))
-    return d.getFullYear() + Mortem.hle
+    const birth = d.getFullYear()
+    const expected = Mortem.ley
+    return  birth + expected
   },
 
-  async pro () {
+  async progressPercentage() {
     checkUnsetDate(Mortem)
-    return `${((await Mortem.ndl()) / Mortem.led * 100).toFixed(2)}%`
+    const lived = await Mortem.numberOfDaysLived()
+    const expected = Mortem.led
+    const percentage = (lived / expected) * 100
+    return `${percentage.toFixed(2)}%`
   },
 
-  async ndl () {
+  async numberOfDaysLived() {
     checkUnsetDate(Mortem)
     const d = new Date(Mortem.cfg.get('date'))
-    return Math.round(Math.abs((d.getTime() - new Date().getTime()) / 86400000))
+    const birth = d.getTime()
+    const now = new Date().getTime()
+    const timeLived = now - birth
+    return Math.ceil(timeLived / (1000 * 60 * 60 * 24))
   }
 }
 

@@ -33,32 +33,32 @@ const command = cli.input[0]
 switch (command) {
   case 'sbd':
     const date = cli.input[1]
-    Mortem.sbd(date)
+    Mortem.setBirthDate(date)
       .then(console.log)
       .catch(console.error)
     break
   case 'gbd':
-    Mortem.gbd()
+    Mortem.getBirthDate()
       .then(console.log)
       .catch(console.error)
     break
   case 'ndl':
-    Mortem.ndl()
+    Mortem.numberOfDaysLived()
       .then(console.log)
       .catch(console.error)
     break
   case 'pro':
-    Mortem.pro()
+    Mortem.progressPercentage()
       .then(console.log)
       .catch(console.error)
     break
   case 'etr':
-    Mortem.etr()
+    Mortem.estimatedTimeRemaining()
       .then(console.log)
       .catch(console.error)
     break
   case 'eyd':
-    Mortem.eyd()
+    Mortem.estimatedYearOfDeath()
       .then(console.log)
       .catch(console.error)
     break
