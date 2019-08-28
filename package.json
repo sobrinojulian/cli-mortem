@@ -1,14 +1,14 @@
 {
-  "name": "cli-mortem",
+  "name": "muerte",
   "description": "Morbid stats",
-  "version": "1.0.3",
-  "homepage": "https://github.com/sobrinojulian/cli-mortem#readme",
-  "repository": "https://github.com/sobrinojulian/cli-mortem.git",
-  "bugs": "https://github.com/sobrinojulian/cli-mortem/issues",
-  "author": "Sobrino Julian <sobrinojulian@protonmail.com> (http://sobrinojulian.github.io)",
+  "version": "1.0.4",
+  "homepage": "https://github.com/sobrinojulian/muerte#readme",
+  "repository": "https://github.com/sobrinojulian/muerte",
+  "bugs": "https://github.com/sobrinojulian/muerte/issues",
+  "author": "Sobrino Julian <sobrinojulian@protonmail.com> (sobrinojulian.github.io)",
   "license": "MIT",
   "bin": {
-    "mortem": "cli.js"
+    "muerte": "cli.js"
   },
   "dependencies": {
     "conf": "^5.0.0",

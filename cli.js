@@ -1,64 +1,64 @@
 #!/usr/bin/env node
 
 const meow = require('meow')
-const Mortem = require('./mortem')
+const Muerte = require('./muerte')
 
 const cli = meow(`
     Usage
-      $ mortem <command>
+      $ muerte <command>
 
     Commands
       sbd   Set Birth Date. FORMAT: YYYY/MM/DD
       gbd   Get Birth Date
       ndl   Number of Days Lived
-      pro   Progress Percentage
+      eyd   Estimated Year of Death
       edr   Estimated Days Remaining
-      eyd   Estimated Date of Death
+      pro   Progress Percentage
 
     Examples
-      $ mortem sbd 1992/07/07
-      $ mortem gbd
+      $ muerte sbd 1992/07/07
+      $ muerte gbd
       1992/07/07
-      $ mortem ndl
+      $ muerte ndl
       9363
-      $ mortem pro
-      36.62%
-      $ mortem edr
-      16204
-      $ mortem eyd
+      $ muerte eyd
       2062
+      $ muerte edr
+      16204
+      $ muerte pro
+      36.62%
 `)
 
 const command = cli.input[0]
 switch (command) {
   case 'sbd':
-    const date = cli.input[1]
-    Mortem.setBirthDate(date)
+    const d = cli.input[1]
+    Muerte.setBirthDate(d)
       .then(console.log)
       .catch(console.error)
     break
   case 'gbd':
-    Mortem.getBirthDate()
+    Muerte.getBirthDate()
       .then(console.log)
       .catch(console.error)
     break
   case 'ndl':
-    Mortem.numberOfDaysLived()
-      .then(console.log)
-      .catch(console.error)
-    break
-  case 'pro':
-    Mortem.progressPercentage()
-      .then(console.log)
-      .catch(console.error)
-    break
-  case 'edr':
-    Mortem.estimatedDaysRemaining()
+    Muerte.numberOfDaysLived()
       .then(console.log)
       .catch(console.error)
     break
   case 'eyd':
-    Mortem.estimatedYearOfDeath()
+    Muerte.estimatedYearOfDeath()
+      .then(console.log)
+      .catch(console.error)
+    break
+  case 'edr':
+    Muerte.estimatedDaysRemaining()
+      .then(console.log)
+      .catch(console.error)
+    break
+  case 'pro':
+    Muerte.progressPercentage()
       .then(console.log)
       .catch(console.error)
     break

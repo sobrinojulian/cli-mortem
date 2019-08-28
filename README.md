@@ -1,4 +1,4 @@
-# cli-mortem
+# muerte
 
 > Morbid stats
 
@@ -6,17 +6,17 @@
 ## Install
 
 ```
-$ npm install --global cli-mortem
+$ npm install --global muerte
 ```
 
 
 ## Usage
 
 ```
-$ mortem --help
+$ muerte --help
 
   Usage
-    $ mortem <command>
+    $ muerte <command>
 
   Commands
     sbd   Set Birth Date. FORMAT: YYYY/MM/DD
@@ -27,16 +27,16 @@ $ mortem --help
     eyd   Estimated Date of Death
 
   Examples
-    $ mortem sbd 1992/07/07
-    $ mortem gbd
+    $ muerte sbd 1992/07/07
+    $ muerte gbd
     1992/07/07
-    $ mortem ndl
+    $ muerte ndl
     9363
-    $ mortem pro
+    $ muerte pro
     36.62%
-    $ mortem edr
+    $ muerte edr
     16204
-    $ mortem eyd
+    $ muerte eyd
     2062
 ```
 
