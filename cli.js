@@ -1,67 +1,68 @@
 #!/usr/bin/env node
 
-const meow = require('meow')
-const Muerte = require('./muerte')
+const meow = require("meow");
+const Mortem = require("./mortem");
 
 const cli = meow(`
     Usage
-      $ muerte <command>
+      $ mortem <date> <command>
 
-    Commands
-      sbd   Set Birth Date. FORMAT: YYYY/MM/DD
-      gbd   Get Birth Date
+    <date>  Birth date. FORMAT: YYYY/MM/DD
+    
+    <command>
       ndl   Number of Days Lived
       eyd   Estimated Year of Death
       edr   Estimated Days Remaining
       pro   Progress Percentage
 
     Examples
-      $ muerte sbd 1992/07/07
-      $ muerte gbd
-      1992/07/07
-      $ muerte ndl
+      $ mortem 1992/07/07 ndl
       9363
-      $ muerte eyd
+      $ mortem 1992/07/07 eyd
       2062
-      $ muerte edr
+      $ mortem 1992/07/07 edr
       16204
-      $ muerte pro
+      $ mortem 1992/07/07 pro
       36.62%
-`)
+`);
 
-const command = cli.input[0]
-switch (command) {
-  case 'sbd':
-    const d = cli.input[1]
-    Muerte.setBirthDate(d)
-      .then(console.log)
-      .catch(console.error)
-    break
-  case 'gbd':
-    Muerte.getBirthDate()
-      .then(console.log)
-      .catch(console.error)
-    break
-  case 'ndl':
-    Muerte.numberOfDaysLived()
-      .then(console.log)
-      .catch(console.error)
-    break
-  case 'eyd':
-    Muerte.estimatedYearOfDeath()
-      .then(console.log)
-      .catch(console.error)
-    break
-  case 'edr':
-    Muerte.estimatedDaysRemaining()
-      .then(console.log)
-      .catch(console.error)
-    break
-  case 'pro':
-    Muerte.progressPercentage()
-      .then(console.log)
-      .catch(console.error)
-    break
-  default:
-    cli.showHelp()
+const re =
+  /^(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[01]|0[1-9]|[12][0-9])$/;
+const isDate = re.test(cli.input[0]);
+
+// undefined means no command given, same as cli.inpute.length == 1
+const isCommand = ["ndl", "eyd", "edr", "pro", undefined].includes(
+  cli.input[1]
+);
+
+if (isDate && isCommand) {
+  const birth = new Date(cli.input[0]);
+  const command = cli.input[1];
+  const m = new Mortem(birth);
+  switch (command) {
+    case undefined:
+      console.log(
+        [
+          `ndl: ${m.ndl()}`,
+          `eyd: ${m.eyd()}`,
+          `edr: ${m.edr()}`,
+          `pro: ${m.pro().toFixed(2)}%`,
+        ].join("\n")
+      );
+      break;
+    case "ndl":
+      console.log(m.ndl());
+      break;
+    case "eyd":
+      console.log(m.eyd());
+      break;
+    case "edr":
+      console.log(m.edr());
+      break;
+    case "pro":
+      console.log(`${m.pro().toFixed(2)}%`);
+      break;
+  }
+} else {
+  console.error("Invalid command");
 }

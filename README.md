@@ -1,51 +1,54 @@
-# muerte
+# mortem-cli
 
-> Morbid stats
+> 💀 Death clock
 
 
 ## Install
 
 ```
-$ npm install --global muerte
+$ npm install --global https://github.com/sobrinojulian/mortem-cli
 ```
 
 
 ## Usage
 
 ```
-$ muerte --help
+$ mortem --help
 
   Usage
-    $ muerte <command>
+    $ mortem <date> <command>
 
-  Commands
-    sbd   Set Birth Date. FORMAT: YYYY/MM/DD
-    gbd   Get Birth Date
+  <date>  Birth date. FORMAT: YYYY/MM/DD
+  
+  <command>
     ndl   Number of Days Lived
-    pro   Progress Percentage
+    eyd   Estimated Year of Death
     edr   Estimated Days Remaining
-    eyd   Estimated Date of Death
+    pro   Progress Percentage
 
   Examples
-    $ muerte sbd 1992/07/07
-    $ muerte gbd
-    1992/07/07
-    $ muerte ndl
+    $ mortem 1992/07/07 ndl
     9363
-    $ muerte pro
-    36.62%
-    $ muerte edr
-    16204
-    $ muerte eyd
+    $ mortem 1992/07/07 eyd
     2062
+    $ mortem 1992/07/07 edr
+    16204
+    $ mortem 1992/07/07 pro
+    36.62%
 ```
 
+## Tip
+Add `alias m='mortem <date>'` to your .zshrc/.bashrc, to invoke mortem without
+having to repeat the date.
+
+```sh
+$ alias m='mortem <date>'
+$ m ndl # 9363
+$ m eyd # 2062
+$ m edr # 16204
+$ m pro # 36.62%
+```
 
 ## Related
 
 - [joshavanier/mortem](https://gitlab.com/joshavanier/mortem) - API for this module
-
-
-## License
-
-MIT © [Sobrino Julian](sobrinojulian.github.io)
