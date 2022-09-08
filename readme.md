@@ -21,20 +21,27 @@ $ mortem --help
   <date>  Birth date. FORMAT: YYYY/MM/DD
   
   <command>
+    all   Summary. DEFAULT
+    age   Age in Years
     ndl   Number of Days Lived
     eyd   Estimated Year of Death
     edr   Estimated Days Remaining
-    pro   Progress Percentage
+    pro   Life Progress Percentage
+    ypr   Year Progress Percentage
 
   Examples
+    $ mortem 1992/07/07 age
+    30.19
     $ mortem 1992/07/07 ndl
-    9363
+    11020
     $ mortem 1992/07/07 eyd
-    2062
+    2067
     $ mortem 1992/07/07 edr
-    16204
+    16355
     $ mortem 1992/07/07 pro
-    36.62%
+    40.26
+    $ mortem 1992/07/07 ypr
+    68.72
 ```
 
 ## Tip

@@ -10,12 +10,17 @@ const cli = meow(`
     <date>  Birth date. FORMAT: YYYY/MM/DD
     
     <command>
+      all   Summary. DEFAULT
+      age   Age in Years
       ndl   Number of Days Lived
       eyd   Estimated Year of Death
       edr   Estimated Days Remaining
-      pro   Progress Percentage
+      pro   Life Progress Percentage
+      ypr   Year Progress Percentage
 
     Examples
+      $ mortem 1992/07/07 age
+      30.1
       $ mortem 1992/07/07 ndl
       9363
       $ mortem 1992/07/07 eyd
@@ -26,14 +31,15 @@ const cli = meow(`
       36.62%
 `);
 
+// Validate first parameter
 const re =
   /^(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[01]|0[1-9]|[12][0-9])$/;
 const isDate = re.test(cli.input[0]);
 
-// undefined means no command given, same as cli.inpute.length == 1
-const isCommand = ["ndl", "eyd", "edr", "pro", undefined].includes(
-  cli.input[1]
-);
+// Validate second parameter
+const empty = undefined
+const validCommands = [empty, "all", "age", "ndl", "eyd", "edr", "pro", "ypr"]
+const isCommand = validCommands.includes(cli.input[1]);
 
 if (isDate && isCommand) {
   const birth = new Date(cli.input[0]);
@@ -41,14 +47,13 @@ if (isDate && isCommand) {
   const m = new Mortem(birth);
   switch (command) {
     case undefined:
-      console.log(
-        [
-          `ndl: ${m.ndl()}`,
-          `eyd: ${m.eyd()}`,
-          `edr: ${m.edr()}`,
-          `pro: ${m.pro().toFixed(2)}%`,
-        ].join("\n")
-      );
+      console.log(m.all());
+      break;
+    case "all":
+      console.log(m.all());
+      break;
+    case "age":
+      console.log(m.age());
       break;
     case "ndl":
       console.log(m.ndl());
@@ -60,9 +65,12 @@ if (isDate && isCommand) {
       console.log(m.edr());
       break;
     case "pro":
-      console.log(`${m.pro().toFixed(2)}%`);
+      console.log(m.pro());
+      break;
+    case "ypr":
+      console.log(m.ypr());
       break;
   }
 } else {
-  console.error("Invalid command");
+  console.error("Invalid command\n$ mortem --help");
 }

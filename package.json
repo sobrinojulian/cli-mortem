@@ -1,6 +1,4 @@
 {
-  "name": "mortem-cli",
-  "version": "1.0.5",
   "bin": {
     "mortem": "cli.js"
   },
