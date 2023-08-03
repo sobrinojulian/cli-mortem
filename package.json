@@ -1,6 +1,7 @@
 {
   "name": "mortem-cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
+  "type": "module",
   "bin": {
     "mortem": "cli.js"
   },
@@ -8,6 +9,6 @@
     "start": "./cli.js"
   },
   "dependencies": {
-    "meow": "^5.0.0"
+    "meow": "^12.0.1"
   }
 }

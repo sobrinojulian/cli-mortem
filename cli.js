@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-const meow = require("meow");
-const Mortem = require("./mortem");
+import meow from 'meow'
+import Mortem from './mortem.js'
 
-const cli = meow(`
+const cli = meow(
+  `
     Usage
       $ mortem <date> <command>
 
     <date>  Birth date. FORMAT: YYYY/MM/DD
-    
+
     <command>
       all   Summary. DEFAULT
       age   Age in Years
@@ -29,48 +30,48 @@ const cli = meow(`
       16204
       $ mortem 1992/07/07 pro
       36.62%
-`);
+`,
+  { importMeta: import.meta }
+)
 
 // Validate first parameter
 const re =
-  /^(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[01]|0[1-9]|[12][0-9])$/;
-const isDate = re.test(cli.input[0]);
+  /^(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[01]|0[1-9]|[12][0-9])$/
+const isDate = re.test(cli.input[0])
 
 // Validate second parameter
 const empty = undefined
-const validCommands = [empty, "all", "age", "ndl", "eyd", "edr", "pro", "ypr"]
-const isCommand = validCommands.includes(cli.input[1]);
+const validCommands = [empty, 'all', 'age', 'ndl', 'eyd', 'edr', 'pro', 'ypr']
+const isCommand = validCommands.includes(cli.input[1])
 
 if (isDate && isCommand) {
-  const birth = new Date(cli.input[0]);
-  const command = cli.input[1];
-  const m = new Mortem(birth);
+  const birth = new Date(cli.input[0])
+  const command = cli.input[1]
+  const m = new Mortem(birth)
   switch (command) {
     case undefined:
-      console.log(m.all());
-      break;
-    case "all":
-      console.log(m.all());
-      break;
-    case "age":
-      console.log(m.age());
-      break;
-    case "ndl":
-      console.log(m.ndl());
-      break;
-    case "eyd":
-      console.log(m.eyd());
-      break;
-    case "edr":
-      console.log(m.edr());
-      break;
-    case "pro":
-      console.log(m.pro());
-      break;
-    case "ypr":
-      console.log(m.ypr());
-      break;
+    case 'all':
+      console.log(m.all())
+      break
+    case 'age':
+      console.log(m.age())
+      break
+    case 'ndl':
+      console.log(m.ndl())
+      break
+    case 'eyd':
+      console.log(m.eyd())
+      break
+    case 'edr':
+      console.log(m.edr())
+      break
+    case 'pro':
+      console.log(m.pro())
+      break
+    case 'ypr':
+      console.log(m.ypr())
+      break
   }
 } else {
-  console.error("Invalid command\n$ mortem --help");
+  console.error('Invalid command\n$ mortem --help')
 }
