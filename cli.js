@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import meow from 'meow'
 import Mortem from './mortem.js'
 
-const cli = meow(
-  `
+const args = process.argv.slice(2)
+
+if (args.length === 0 || args.includes('--help')) {
+  console.log(`
     Usage
       $ mortem <date> <command>
 
@@ -30,23 +31,23 @@ const cli = meow(
       16204
       $ mortem 1992/07/07 pro
       36.62%
-`,
-  { importMeta: import.meta }
-)
+  `)
+  process.exit(0)
+}
 
 // Validate first parameter
 const re =
   /^(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[01]|0[1-9]|[12][0-9])$/
-const isDate = re.test(cli.input[0])
+const isDate = re.test(args[0])
 
 // Validate second parameter
 const empty = undefined
 const validCommands = [empty, 'all', 'age', 'ndl', 'eyd', 'edr', 'pro', 'ypr']
-const isCommand = validCommands.includes(cli.input[1])
+const isCommand = validCommands.includes(args[1])
 
 if (isDate && isCommand) {
-  const birth = new Date(cli.input[0])
-  const command = cli.input[1]
+  const birth = new Date(args[0])
+  const command = args[1] || 'all'
   const m = new Mortem(birth)
   switch (command) {
     case undefined:
@@ -74,4 +75,5 @@ if (isDate && isCommand) {
   }
 } else {
   console.error('Invalid command\n$ mortem --help')
+  process.exit(1)
 }
